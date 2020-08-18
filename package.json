@@ -5,7 +5,14 @@
 	"scripts": {
 		"parcelBuild": "parcel build --no-source-maps ./src/scripts/index.js --out-dir ./build/scripts",
 		"parcelDev": "parcel build --no-minify --no-source-maps ./src/scripts/index.js --out-dir ./build/scripts",
-		"syncImg": "sync-glob './src/images/*' ./build/images"
+		"syncImg": "sync-glob './src/images/*' ./build/images",
+		"syncFonts": "sync-glob './src/fonts/*' ./build/fonts",
+		"sync":
+		"browserSync": "browser-sync https://${npm_package_name}.local -f='build/wp-content/themes/**/*' -w",
+		"watch": "npm run copyAssets && npm-watch",
+		"build": "npm run copyAssets && npm run sassBuild && npm run parcelBuild && npm run themeSyncAll && npm run purgeCss",
+		"dev": "npm run copyAssets && npm run sassDev && npm run parcelDev && npm run themeSyncAll"
+
 	},
 	"author": "pil",
 	"license": "MIT",
