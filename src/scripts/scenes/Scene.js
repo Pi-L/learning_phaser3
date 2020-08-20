@@ -195,10 +195,6 @@ export default class Scene extends ScenePhaser {
         }
     }
 
-    gameOver = () => {
-
-    }
-
     createScoreBoard = () => {
         const graphics = this.add.graphics();
 
@@ -211,4 +207,8 @@ export default class Scene extends ScenePhaser {
             gameSettings.score.text.y, 'pixelFont', `Lives ${this.playerState.lives}`, gameSettings.score.text.fontSize);
     }
 
+    centerObject = (object) => {
+        object.x = this.canvas.width / 2;
+        object.y = this.canvas.height / 2;
+    }
 }
