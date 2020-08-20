@@ -5,7 +5,7 @@ import Explosion from '../effects/Explosion';
 
 // https://rexrainbow.github.io/phaser3-rex-notes/docs/site/arcade-world/
 export default class Scene extends ScenePhaser {
-    constructor({ key }, score = 0) {
+    constructor({ key }) {
         super({ key });
 
         this.canvas = {
@@ -13,7 +13,7 @@ export default class Scene extends ScenePhaser {
             height: getSizes().height,
         }
 
-        this.score = score;
+        this.score = 0;
     }
 
     playerState = {
@@ -49,6 +49,8 @@ export default class Scene extends ScenePhaser {
         this.player = this.physics.add.sprite(this.canvas.width / 2, this.canvas.height / 2, 'player_idle');
         this.player.setInteractive();
         this.player.setScale(1.5);
+
+        // this.cameras.main.startFollow(this.player);
 
         this.physics.world.setBounds(0, gameSettings.score.board.height, this.canvas.width, this.canvas.height - gameSettings.score.board.height);
         this.player.setCollideWorldBounds(true);
@@ -132,7 +134,7 @@ export default class Scene extends ScenePhaser {
         this.player?.play('player_die', true)?.on('animationcomplete',
             () => {
                 this.objectExplode(this.player, 5);
-                setTimeout(() => this.scene.start("gameOver"), 2000);
+                setTimeout(() => this.scene.start("gameOver", { score: this.score }), 2000);
             }, this);
     }
 

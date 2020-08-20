@@ -37,21 +37,22 @@ export default class SceneWelcome extends Scene {
 
         const WelcomeMessage = this.add.text(this.canvas.width / 2, this.canvas.height / 6, " Welcome ! ", { color: '#2f2f2f', align: 'center', fontFamily: 'Pangolin, cursive', fontSize: 50 });
         const willStartMessage = this.add.text(this.canvas.width / 2, this.canvas.height / 3, " The Game Will Start in ", { color: '#aa0000', align: 'center', fontFamily: 'Pangolin, cursive', fontSize: 35 });
-        const countDownMessage = this.add.text(this.canvas.width / 2, this.canvas.height / 2, "  ", { color: '#aa0000', align: 'center', fontFamily: 'Pangolin, cursive', fontSize: 41 });
+        const countDownMessage = this.add.text(this.canvas.width / 2, this.canvas.height / 2, " 3 ", { color: '#aa0000', align: 'center', fontFamily: 'Pangolin, cursive', fontSize: 41 });
 
         WelcomeMessage.x = this.canvas.width / 2 - WelcomeMessage.width / 2;
         willStartMessage.x = this.canvas.width / 2 - willStartMessage.width / 2;
         countDownMessage.x = this.canvas.width / 2 - countDownMessage.width / 2;
 
-        for (let i = 3; i >= 1; i--) {
-            setTimeout(() => { countDownMessage.text = ` ${i} ` }, (4 - i) * 1000);
+        for (let i = 2; i > 0; i--) {
+            setTimeout(() => { countDownMessage.text = ` ${i} ` }, (3 - i) * 1000);
         }
+
         setTimeout(() => {
             countDownMessage.text = ' START! ';
             countDownMessage.x = this.canvas.width / 2 - countDownMessage.width / 2;
-        }, 3600);
+        }, 2600);
 
-        setTimeout(() => { this.scene.start("playGame") }, 4000);
+        setTimeout(() => { this.scene.start("playGame") }, 3300);
     }
 
     // update() {
