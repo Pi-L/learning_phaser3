@@ -26,8 +26,8 @@ export default class Scene1 extends Scene {
         this.background.setOrigin(0, 0);
 
         // Add multiple bombs
-        const maxObjects = 2;
-        for (let i = 0; i <= maxObjects; i++) {
+        const maxObjects = 20;
+        for (let i = 0; i < maxObjects; i++) {
             const bomb = this.physics.add.sprite(16, 16, "bomb");
             this.bombs.add(bomb);
             bomb.setRandomPosition(0, 0, this.canvas.width - 3, this.canvas.height - 3);

@@ -25,6 +25,9 @@ export default class Scene extends ScenePhaser {
         isCreated: false,
     }
 
+    bombPointsValue = 10;
+
+    score = 0;
 
     //
 
@@ -38,6 +41,9 @@ export default class Scene extends ScenePhaser {
     }
 
     create() {
+
+        this.scoreLabel = this.add.bitmapText(10, 10, 'pixelFont', 'Score : 0', 40);
+
         this.player = this.physics.add.sprite(this.canvas.width / 2, this.canvas.height / 2, 'player_idle');
         this.player.setInteractive();
         this.player.setCollideWorldBounds(true);
@@ -80,6 +86,8 @@ export default class Scene extends ScenePhaser {
     explosion = (projectile, bomb) => {
         projectile.destroy();
         this.bombExplode(bomb);
+        this.score += this.bombPointsValue;
+        this.scoreLabel.text = `Score : ${this.score}`;
     }
 
     dying(player, bomb) {
