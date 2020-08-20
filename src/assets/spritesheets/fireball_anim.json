@@ -1,0 +1,24 @@
+{
+    "anims": [
+        {
+            "key": "fireball",
+            "type": "frames",
+            "repeat": -1,
+            "frameRate": 8,
+            "frames": [
+                {
+                    "key": "fireball",
+                    "frame": "fireball_01"
+                },
+                {
+                    "key": "fireball",
+                    "frame": "fireball_02"
+                },
+                {
+                    "key": "fireball",
+                    "frame": "fireball_03"
+                }
+            ]
+        }
+    ]
+}

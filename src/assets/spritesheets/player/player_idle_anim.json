@@ -1,0 +1,28 @@
+{
+    "anims": [
+        {
+            "key": "player_idle",
+            "type": "frames",
+            "repeat": -1,
+            "frameRate": 10,
+            "frames": [
+                {
+                    "key": "player_idle",
+                    "frame": "player-idle-1"
+                },
+                {
+                    "key": "player_idle",
+                    "frame": "player-idle-2"
+                },
+                {
+                    "key": "player_idle",
+                    "frame": "player-idle-3"
+                },
+                {
+                    "key": "player_idle",
+                    "frame": "player-idle-4"
+                }
+            ]
+        }
+    ]
+}

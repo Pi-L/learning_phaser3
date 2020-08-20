@@ -1,0 +1,37 @@
+{
+    "anims": [
+        {
+            "key": "player_die",
+            "type": "frames",
+            "repeat": 0,
+            "frameRate": 10,
+            "hideOnComplete": false,
+            "frames": [
+                {
+                    "key": "player_die",
+                    "frame": "player-jump-2"
+                },
+                {
+                    "key": "player_die",
+                    "frame": "player-hurt-1"
+                },
+                {
+                    "key": "player_die",
+                    "frame": "player-hurt-11"
+                },
+                {
+                    "key": "player_die",
+                    "frame": "player-hurt-2"
+                },
+                {
+                    "key": "player_die",
+                    "frame": "player-hurt-11"
+                },
+                {
+                    "key": "player_die",
+                    "frame": "player-climb-1"
+                }
+            ]
+        }
+    ]
+}

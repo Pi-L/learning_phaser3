@@ -1,0 +1,36 @@
+{
+    "anims": [
+        {
+            "key": "player_run",
+            "type": "frames",
+            "repeat": -1,
+            "frameRate": 12,
+            "frames": [
+                {
+                    "key": "player_run",
+                    "frame": "player-run-1"
+                },
+                {
+                    "key": "player_run",
+                    "frame": "player-run-2"
+                },
+                {
+                    "key": "player_run",
+                    "frame": "player-run-3"
+                },
+                {
+                    "key": "player_run",
+                    "frame": "player-run-4"
+                },
+                {
+                    "key": "player_run",
+                    "frame": "player-run-5"
+                },
+                {
+                    "key": "player_run",
+                    "frame": "player-run-6"
+                }
+            ]
+        }
+    ]
+}
