@@ -23,6 +23,23 @@ const gameSettings = {
     player: {
         speedX: 100,
         speedY: 70,
+    },
+    score: {
+        bombValue: {
+            default: 20,
+            red: 30,
+            grey: 20,
+        },
+        board: {
+            height: 50,
+            color: 0x121212,
+        },
+        text: {
+            x: 10,
+            y: 10,
+            fontSize: 40,
+        }
+
     }
 };
 

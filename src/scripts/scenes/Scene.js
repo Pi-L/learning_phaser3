@@ -25,7 +25,8 @@ export default class Scene extends ScenePhaser {
         isCreated: false,
     }
 
-    bombPointsValue = 10;
+
+    // bombPointsValue = 10;
 
     score = 0;
 
@@ -41,11 +42,11 @@ export default class Scene extends ScenePhaser {
     }
 
     create() {
-
-        this.scoreLabel = this.add.bitmapText(10, 10, 'pixelFont', 'Score : 0', 40);
+        this.createScore();
 
         this.player = this.physics.add.sprite(this.canvas.width / 2, this.canvas.height / 2, 'player_idle');
         this.player.setInteractive();
+        this.physics.world.setBounds(0, gameSettings.score.board.height, this.canvas.width, this.canvas.height - gameSettings.score.board.height);
         this.player.setCollideWorldBounds(true);
 
         this.bombs = this.physics.add.group();
@@ -86,8 +87,8 @@ export default class Scene extends ScenePhaser {
     explosion = (projectile, bomb) => {
         projectile.destroy();
         this.bombExplode(bomb);
-        this.score += this.bombPointsValue;
-        this.scoreLabel.text = `Score : ${this.score}`;
+        this.score += gameSettings.score.bombValue.default;
+        this.scoreLabel.text = `Score ${this.score}`;
     }
 
     dying(player, bomb) {
@@ -174,16 +175,21 @@ export default class Scene extends ScenePhaser {
 
     }
 
-    // onAnimationcomplete = (anim) => {
-    //   console.log("animationcomplete", anim.key);
+    createScore = () => {
+        const graphics = this.add.graphics();
+        graphics.fillStyle(gameSettings.score.board.color, 1);
+        graphics.beginPath();
+        graphics.moveTo(0, 0);
+        graphics.lineTo(this.canvas.width, 0);
+        graphics.lineTo(this.canvas.width, gameSettings.score.board.height);
+        graphics.lineTo(0, gameSettings.score.board.height);
+        graphics.lineTo(0, 0);
+        //
+        graphics.closePath();
+        graphics.fillPath();
 
-    //   var next = anims.shift();
+        this.scoreLabel = this.add.bitmapText(gameSettings.score.text.x, gameSettings.score.text.y, 'pixelFont', `Score ${this.score}`, gameSettings.score.text.fontSize);
 
-    //   if (next) {
-    //     this.play(next);
-    //   } else {
-    //     this.off("animationcomplete", onAnimationcomplete);
-    //   }
-    // };
+    }
 
 }

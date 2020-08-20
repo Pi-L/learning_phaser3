@@ -1,6 +1,4 @@
 import Scene from './Scene';
-import Align from '../helpers/align';
-
 
 export default class Scene1 extends Scene {
     constructor() {
