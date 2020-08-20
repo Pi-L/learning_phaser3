@@ -9,13 +9,11 @@
         "syncCss": "sync-glob -d 'src/styles/*.css' build/styles",
         "sync": "npm-run-all -p cp syncCss syncAssets",
         "cp": "copyfiles -f ./src/*.html ./src/.htaccess ./src/*.txt ./src/*.md ./build",
-        "browserSync": "browser-sync https://${npm_package_name}.local 'build' -w --https",
+        "browserSync": "browser-sync 'build' -w --https",
         "watch": "npm-watch",
         "build": "npm-run-all sync parcelBuild",
         "dev": "npm-run-all sync parcelDev",
-        "vagrantUp": "cd ../../homestead/ && vagrant up",
-        "vagrantHalt": "cd ../../homestead/ && vagrant halt",
-        "start": "(npm run vagrantUp) && (npm run browserSync) & npm run watch"
+        "start": "npm-run-all -p browserSync watch"
     },
     "author": "pil",
     "license": "MIT",
