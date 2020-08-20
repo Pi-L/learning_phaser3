@@ -2,14 +2,17 @@ import { Scene as ScenePhaser, Input } from 'phaser';
 import { getSizes, gameSettings } from '../config';
 import FireBall from '../effects/fireball';
 
+// https://rexrainbow.github.io/phaser3-rex-notes/docs/site/arcade-world/
 export default class Scene extends ScenePhaser {
-    constructor({ key }) {
+    constructor({ key }, score = 0) {
         super({ key });
 
         this.canvas = {
             width: getSizes().width,
             height: getSizes().height,
         }
+
+        this.score = score;
     }
 
     playerState = {
@@ -25,9 +28,9 @@ export default class Scene extends ScenePhaser {
         isCreated: false,
     }
 
-    score = 0;
-
-    //
+    getScoreText() {
+        return `Score ${this.score.toString().padStart(6, '0')}`;
+    }
 
     init() {
         this.physics.world.setBoundsCollision();
@@ -43,6 +46,8 @@ export default class Scene extends ScenePhaser {
 
         this.player = this.physics.add.sprite(this.canvas.width / 2, this.canvas.height / 2, 'player_idle');
         this.player.setInteractive();
+        this.player.setScale(1.5);
+
         this.physics.world.setBounds(0, gameSettings.score.board.height, this.canvas.width, this.canvas.height - gameSettings.score.board.height);
         this.player.setCollideWorldBounds(true);
 
@@ -85,7 +90,7 @@ export default class Scene extends ScenePhaser {
         projectile.destroy();
         this.bombExplode(bomb);
         this.score += gameSettings.score.bombValue.default;
-        this.scoreLabel.text = `Score ${this.score}`;
+        this.scoreLabel.text = this.getScoreText();
     }
 
     dying(player, bomb) {
@@ -174,18 +179,11 @@ export default class Scene extends ScenePhaser {
 
     createScore = () => {
         const graphics = this.add.graphics();
-        graphics.fillStyle(gameSettings.score.board.color, 1);
-        graphics.beginPath();
-        graphics.moveTo(0, 0);
-        graphics.lineTo(this.canvas.width, 0);
-        graphics.lineTo(this.canvas.width, gameSettings.score.board.height);
-        graphics.lineTo(0, gameSettings.score.board.height);
-        graphics.lineTo(0, 0);
-        //
-        graphics.closePath();
-        graphics.fillPath();
 
-        this.scoreLabel = this.add.bitmapText(gameSettings.score.text.x, gameSettings.score.text.y, 'pixelFont', `Score ${this.score}`, gameSettings.score.text.fontSize);
+        graphics.fillStyle(gameSettings.score.board.color, .9);
+        graphics.fillRect(0, 0, this.canvas.width, gameSettings.score.board.height);
+
+        this.scoreLabel = this.add.bitmapText(gameSettings.score.text.x, gameSettings.score.text.y, 'pixelFont', this.getScoreText(), gameSettings.score.text.fontSize);
 
     }
 

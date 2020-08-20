@@ -22,17 +22,12 @@ export default class SceneWelcome extends Scene {
             frameHeight: 16
         });
 
-        this.load.atlas('player_idle', 'assets/spritesheets/player/player_idle.png', 'assets/spritesheets/player/player_idle_atlas.json');
-        this.load.atlas('player_run', 'assets/spritesheets/player/player_run.png', 'assets/spritesheets/player/player_run_atlas.json');
-        this.load.atlas('player_attack', 'assets/spritesheets/player/player_attack.png', 'assets/spritesheets/player/player_attack_atlas.json');
-        this.load.atlas('player_die', 'assets/spritesheets/player/player_die.png', 'assets/spritesheets/player/player_die_atlas.json');
+        this.loadPlayer();
 
         this.load.atlas('fireball', 'assets/spritesheets/fireball.png', 'assets/spritesheets/fireball_atlas.json');
+
         this.load.animation('fireball', 'assets/spritesheets/fireball_anim.json');
-        this.load.animation('player_idle', 'assets/spritesheets/player/player_idle_anim.json');
-        this.load.animation('player_run', 'assets/spritesheets/player/player_run_anim.json');
-        this.load.animation('player_attack', 'assets/spritesheets/player/player_attack_anim.json');
-        this.load.animation('player_die', 'assets/spritesheets/player/player_die_anim.json');
+
 
         this.load.bitmapFont('pixelFont', 'assets/fonts/font.png', 'assets/fonts/font.xml');
 
@@ -62,6 +57,18 @@ export default class SceneWelcome extends Scene {
 
     // update() {
     // }
+
+    loadPlayer = () => {
+        this.load.atlas('player_idle', 'assets/spritesheets/player/player_idle.png', 'assets/spritesheets/player/player_idle_atlas.json');
+        this.load.atlas('player_run', 'assets/spritesheets/player/player_run.png', 'assets/spritesheets/player/player_run_atlas.json');
+        this.load.atlas('player_attack', 'assets/spritesheets/player/player_attack.png', 'assets/spritesheets/player/player_attack_atlas.json');
+        this.load.atlas('player_die', 'assets/spritesheets/player/player_die.png', 'assets/spritesheets/player/player_die_atlas.json');
+
+        this.load.animation('player_idle', 'assets/spritesheets/player/player_idle_anim.json');
+        this.load.animation('player_run', 'assets/spritesheets/player/player_run_anim.json');
+        this.load.animation('player_attack', 'assets/spritesheets/player/player_attack_anim.json');
+        this.load.animation('player_die', 'assets/spritesheets/player/player_die_anim.json');
+    }
 
     createAnims = () => {
         this.anims.create({
