@@ -2,7 +2,7 @@
 
 ## Description
 
--   Learning Game Development and Phaser3 for an upcoming Game Jam \*
+_Learning Game Development and Phaser3 for an upcoming Game Jam_
 
 **Date : 08/2020**
 
