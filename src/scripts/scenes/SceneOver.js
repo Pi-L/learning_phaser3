@@ -13,7 +13,6 @@ export default class SceneOver extends Scene {
         gameOverMessage.setFontFamily("Pangolin, cursive");
         gameOverMessage.setBackgroundColor('#2e2e2e')
         gameOverMessage.x = this.canvas.width / 2 - gameOverMessage.width / 2;
-
     }
 
     update() {

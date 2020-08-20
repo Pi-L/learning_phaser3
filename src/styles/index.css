@@ -40,23 +40,26 @@ figure,
 figcaption,
 blockquote,
 dl,
-dd {
+dd,
+canvas {
     margin: 0;
+    padding: 0;
 }
 
 /* Set core body defaults */
 body {
-    height: 100vh;
+    max-height: 100vh;
     font-size: 1.6em;
     scroll-behavior: smooth;
     text-rendering: optimizeSpeed;
     line-height: 1.5;
+    overflow: hidden;
 }
 
 h1 {
-    height: 70px;
+    height: 7rem;
     margin: 0;
-    padding: 10px 0;
+    padding: 1rem 0;
     width: 100%;
     text-align: center;
     color: #beb893;
@@ -70,11 +73,11 @@ h1 {
     max-height: 0;
     overflow: hidden;
     font-family: 'Pangolin';
-    font-size: 40px;
+    font-size: 1px;
 }
 
 #gameContainer {
-    height: calc(100vh - 76px);
+    height: calc(100vh - 7rem);
     width: 100%;
     padding: 0;
 }

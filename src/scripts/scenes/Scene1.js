@@ -1,4 +1,5 @@
 import Scene from './Scene';
+import Align from '../helpers/align';
 
 
 export default class Scene1 extends Scene {
@@ -17,13 +18,15 @@ export default class Scene1 extends Scene {
     create() {
         super.create();
 
-        // this.background = this.add.image(0, 0, 'bg');
-        // this.background.setOrigin(0, 0);
+        this.background = this.add.image(0, 0, 'bg');
+        this.background.displayHeight = this.canvas.height;
+        const scaleX = this.canvas.width / this.background.width;
+        this.background.setScale(scaleX, 1).setScrollFactor(0);
+        this.background.depth = -1;
+        this.background.setOrigin(0, 0);
 
-        // this.add.text(200, 200, "playMode...", { color: '#ff0f50' });
-
-        // 2.2 Add multiple objects
-        const maxObjects = 100;
+        // Add multiple bombs
+        const maxObjects = 2;
         for (let i = 0; i <= maxObjects; i++) {
             const bomb = this.physics.add.sprite(16, 16, "bomb");
             this.bombs.add(bomb);

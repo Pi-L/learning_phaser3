@@ -1,60 +1,63 @@
 {
-  "name": "phaser",
-  "version": "1.0.0",
-  "description": "",
-  "scripts": {
-    "parcelBuild": "parcel build --no-source-maps ./src/scripts/index.js --out-dir ./build/scripts",
-    "parcelDev": "parcel build --no-minify  ./src/scripts/index.js --out-dir ./build/scripts",
-    "syncAssets": "sync-glob -d 'src/assets/**/*' build/assets",
-    "syncCss": "sync-glob -d 'src/styles/*.css' build/styles",
-    "sync": "npm-run-all -p cp syncCss syncAssets",
-    "cp": "copyfiles -f ./src/*.html ./src/.htaccess ./src/*.txt ./src/*.md ./build",
-    "browserSync": "browser-sync https://${npm_package_name}.local 'build' -w --https",
-    "watch": "npm-watch",
-    "build": "npm-run-all sync parcelBuild",
-    "dev": "npm-run-all sync parcelDev"
-  },
-  "author": "pil",
-  "license": "MIT",
-  "repository": {
-    "url": ""
-  },
-  "devDependencies": {
-    "browser-sync": "^2.26.12",
-    "chokidar": "^3.4.2",
-    "copyfiles": "^2.3.0",
-    "core-js": "^3.6.5",
-    "eslint": "^7.7.0",
-    "npm-run-all": "^4.1.5",
-    "npm-watch": "^0.7.0",
-    "parcel-bundler": "^1.12.4",
-    "poetic": "^1.5.0",
-    "sync-glob": "^1.4.0",
-    "tile-extruder": "^2.0.6"
-  },
-  "dependencies": {
-    "phaser": "^3.24.1"
-  },
-  "watch": {
-    "parcelDev": {
-      "patterns": [
-        "./src"
-      ],
-      "extensions": "html, js"
+    "name": "phaser",
+    "version": "1.0.0",
+    "description": "Learning Game Development and Phaser3",
+    "scripts": {
+        "parcelBuild": "parcel build --no-source-maps ./src/scripts/index.js --out-dir ./build/scripts",
+        "parcelDev": "parcel build --no-minify  ./src/scripts/index.js --out-dir ./build/scripts",
+        "syncAssets": "sync-glob -d 'src/assets/**/*' build/assets",
+        "syncCss": "sync-glob -d 'src/styles/*.css' build/styles",
+        "sync": "npm-run-all -p cp syncCss syncAssets",
+        "cp": "copyfiles -f ./src/*.html ./src/.htaccess ./src/*.txt ./src/*.md ./build",
+        "browserSync": "browser-sync https://${npm_package_name}.local 'build' -w --https",
+        "watch": "npm-watch",
+        "build": "npm-run-all sync parcelBuild",
+        "dev": "npm-run-all sync parcelDev",
+        "vagrantUp": "cd ../../homestead/ && vagrant up",
+        "vagrantHalt": "cd ../../homestead/ && vagrant halt",
+        "start": "(npm run vagrantUp) && (npm run browserSync) & npm run watch"
     },
-    "sync": {
-      "patterns": [
-        "./src"
-      ],
-      "extensions": "html, css, ttf, jpg, jpeg, png, gif, json"
-    }
-  },
-  "browserslist": [
-    "last 1 version",
-    "last 5 Firefox versions",
-    "last 5 Chrome versions",
-    "last 5 iOS versions",
-    "not dead",
-    "not IE 11 and > 0.5%"
-  ]
+    "author": "pil",
+    "license": "MIT",
+    "repository": {
+        "url": "https://github.com/Pi-L/learning_phaser3"
+    },
+    "devDependencies": {
+        "browser-sync": "^2.26.12",
+        "chokidar": "^3.4.2",
+        "copyfiles": "^2.3.0",
+        "core-js": "^3.6.5",
+        "eslint": "^7.7.0",
+        "npm-run-all": "^4.1.5",
+        "npm-watch": "^0.7.0",
+        "parcel-bundler": "^1.12.4",
+        "poetic": "^1.5.0",
+        "sync-glob": "^1.4.0",
+        "tile-extruder": "^2.0.6"
+    },
+    "dependencies": {
+        "phaser": "^3.24.1"
+    },
+    "watch": {
+        "parcelDev": {
+            "patterns": [
+                "./src"
+            ],
+            "extensions": "html, js"
+        },
+        "sync": {
+            "patterns": [
+                "./src"
+            ],
+            "extensions": "html, css, ttf, jpg, jpeg, png, gif, json"
+        }
+    },
+    "browserslist": [
+        "last 1 version",
+        "last 5 Firefox versions",
+        "last 5 Chrome versions",
+        "last 5 iOS versions",
+        "not dead",
+        "not IE 11 and > 0.5%"
+    ]
 }

@@ -10,7 +10,7 @@ export default class SceneWelcome extends Scene {
     // }
 
     preload() {
-        this.load.image('bg', 'assets/images/back.png');
+        this.load.image('bg', 'assets/images/space.jpeg');
 
         this.load.spritesheet('explode', 'assets/spritesheets/explosion.png', {
             frameWidth: 16,
@@ -34,22 +34,16 @@ export default class SceneWelcome extends Scene {
         this.load.animation('player_attack', 'assets/spritesheets/player/player_attack_anim.json');
         this.load.animation('player_die', 'assets/spritesheets/player/player_die_anim.json');
 
+        this.load.bitmapFont('pixelFont', 'assets/fonts/font.png', 'assets/fonts/font.xml');
+
     }
 
     create() {
         this.createAnims();
 
-        const WelcomeMessage = this.add.text(this.canvas.width / 2, this.canvas.height / 6, " Welcome ! ", { color: '#2f2f2f', align: 'center' });
-        const willStartMessage = this.add.text(this.canvas.width / 2, this.canvas.height / 3, " The Game Will Start in ", { color: '#aa0000', align: 'center' });
-        const countDownMessage = this.add.text(this.canvas.width / 2, this.canvas.height / 2, "  ", { color: '#aa0000', align: 'center' });
-
-        WelcomeMessage.setFontSize(50);
-        willStartMessage.setFontSize(35);
-        countDownMessage.setFontSize(41);
-
-        WelcomeMessage.setFontFamily("Pangolin, cursive");
-        willStartMessage.setFontFamily("Pangolin, cursive");
-        countDownMessage.setFontFamily("Pangolin, cursive");
+        const WelcomeMessage = this.add.text(this.canvas.width / 2, this.canvas.height / 6, " Welcome ! ", { color: '#2f2f2f', align: 'center', fontFamily: 'Pangolin, cursive', fontSize: 50 });
+        const willStartMessage = this.add.text(this.canvas.width / 2, this.canvas.height / 3, " The Game Will Start in ", { color: '#aa0000', align: 'center', fontFamily: 'Pangolin, cursive', fontSize: 35 });
+        const countDownMessage = this.add.text(this.canvas.width / 2, this.canvas.height / 2, "  ", { color: '#aa0000', align: 'center', fontFamily: 'Pangolin, cursive', fontSize: 41 });
 
         WelcomeMessage.x = this.canvas.width / 2 - WelcomeMessage.width / 2;
         willStartMessage.x = this.canvas.width / 2 - willStartMessage.width / 2;
