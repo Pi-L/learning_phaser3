@@ -16,12 +16,6 @@ export default class Scene1 extends Scene {
         top: this.canvas.height / 2 - this.boxHalfSize,
         bottom: this.canvas.height / 2 + this.boxHalfSize,
     };
-    // init() {
-    // }
-
-    // preload() {
-
-    // }
 
     create() {
         super.create();
