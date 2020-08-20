@@ -25,9 +25,6 @@ export default class Scene extends ScenePhaser {
         isCreated: false,
     }
 
-
-    // bombPointsValue = 10;
-
     score = 0;
 
     //

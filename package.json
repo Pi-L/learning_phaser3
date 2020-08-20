@@ -4,7 +4,7 @@
     "description": "Learning Game Development and Phaser3",
     "scripts": {
         "parcelBuild": "parcel build --no-source-maps ./src/scripts/index.js --out-dir ./build/scripts",
-        "parcelDev": "parcel build --no-minify  ./src/scripts/index.js --out-dir ./build/scripts",
+        "parcelDev": "parcel build --no-source-maps --no-minify  ./src/scripts/index.js --out-dir ./build/scripts",
         "syncAssets": "sync-glob -d 'src/assets/**/*' build/assets",
         "syncCss": "sync-glob -d 'src/styles/*.css' build/styles",
         "sync": "npm-run-all -p cp syncCss syncAssets",

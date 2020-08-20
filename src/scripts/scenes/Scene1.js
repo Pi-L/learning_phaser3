@@ -24,7 +24,7 @@ export default class Scene1 extends Scene {
         this.background.setOrigin(0, 0);
 
         // Add multiple bombs
-        const maxObjects = 20;
+        const maxObjects = 50;
         for (let i = 0; i < maxObjects; i++) {
             const bomb = this.physics.add.sprite(16, 16, "bomb");
             this.bombs.add(bomb);

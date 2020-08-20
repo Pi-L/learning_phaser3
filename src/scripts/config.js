@@ -17,6 +17,11 @@ const pilConfig = {
             debug: false
         }
     },
+    fps: {
+        target: 25,
+        min: 25,
+        forceSetTimeOut: true
+    }
 };
 
 const gameSettings = {
