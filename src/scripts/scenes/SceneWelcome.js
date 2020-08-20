@@ -1,5 +1,4 @@
 import Scene from './Scene';
-import { pilConfig } from '../config';
 
 export default class SceneWelcome extends Scene {
     constructor() {

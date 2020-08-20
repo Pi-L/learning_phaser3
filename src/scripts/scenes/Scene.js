@@ -40,9 +40,6 @@ export default class Scene extends ScenePhaser {
         this.spacebar = this.input.keyboard.addKey(Input.Keyboard.KeyCodes.SPACE);
     }
 
-    preload() {
-    }
-
     create() {
         this.createScoreBoard();
 

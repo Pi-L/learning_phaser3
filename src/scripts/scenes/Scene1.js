@@ -8,6 +8,8 @@ export default class Scene1 extends Scene {
         this.bombsVelocity = Math.ceil(this.canvas.width * this.canvas.height / 15000);
     }
 
+    boxHalfSize = 100;
+
     boxSides = {
         left: this.canvas.width / 2 - this.boxHalfSize,
         right: this.canvas.width / 2 + this.boxHalfSize,
