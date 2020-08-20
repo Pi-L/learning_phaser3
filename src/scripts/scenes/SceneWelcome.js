@@ -25,7 +25,6 @@ export default class SceneWelcome extends Scene {
         this.loadPlayer();
 
         this.load.atlas('fireball', 'assets/spritesheets/fireball.png', 'assets/spritesheets/fireball_atlas.json');
-
         this.load.animation('fireball', 'assets/spritesheets/fireball_anim.json');
 
 

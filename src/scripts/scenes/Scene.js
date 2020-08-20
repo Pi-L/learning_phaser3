@@ -1,6 +1,7 @@
 import { Scene as ScenePhaser, Input } from 'phaser';
 import { getSizes, gameSettings } from '../config';
-import FireBall from '../effects/fireball';
+import FireBall from '../effects/Fireball';
+import Explosion from '../effects/Explosion';
 
 // https://rexrainbow.github.io/phaser3-rex-notes/docs/site/arcade-world/
 export default class Scene extends ScenePhaser {
@@ -22,6 +23,7 @@ export default class Scene extends ScenePhaser {
         isDead: false,
         isAttacking: false,
         isIdle: true,
+        lives: 3,
     };
 
     sceneState = {
@@ -42,7 +44,7 @@ export default class Scene extends ScenePhaser {
     }
 
     create() {
-        this.createScore();
+        this.createScoreBoard();
 
         this.player = this.physics.add.sprite(this.canvas.width / 2, this.canvas.height / 2, 'player_idle');
         this.player.setInteractive();
@@ -55,9 +57,9 @@ export default class Scene extends ScenePhaser {
         this.projectiles = this.physics.add.group();
 
 
-        this.physics.add.collider(this.projectiles, this.bombs, this.explosion);
+        this.physics.add.collider(this.projectiles, this.bombs, this.hitTarget);
         // this.physics.add.overlap(this.player, this.powerUps, this.pickPowerUp, null, this);
-        this.physics.add.overlap(this.player, this.bombs, this.dying, null, this);
+        this.physics.add.overlap(this.player, this.bombs, this.playerHit, null, this);
 
         this.sceneState.isCreated = true;
     }
@@ -68,51 +70,69 @@ export default class Scene extends ScenePhaser {
         this.projectiles?.getChildren().map(projectile => projectile.update());
     }
 
-    bombExplode(bomb, scale = 2) {
-        this.bombs.remove(bomb);
-        bomb.setTexture('explode');
-        bomb.setScale(scale);
-        bomb.setVelocity(0, 0);
-        bomb.play('explodeAnim', true).on('animationcomplete',
-            () => bomb.destroy());
+    objectExplode(object, scale = 2) {
+        const explosion = new Explosion(this, object.x, object.y, scale);
+        object.destroy();
     }
 
     shootFireball() {
-        const fireball = new FireBall(this);
-        // this.physics.add.sprite(player.x, player.y, 'fireball');
+        let fireball;
+        if (this.player?.body?.checkCollision?.none === false)
+            fireball = new FireBall(this);
     }
 
     // pickPowerUp(player, powerUp) {
     //   powerUp.disableBody(true, true);
     // }
 
-    explosion = (projectile, bomb) => {
+    hitTarget = (projectile, bomb) => {
         projectile.destroy();
-        this.bombExplode(bomb);
+        this.objectExplode(bomb);
         this.score += gameSettings.score.bombValue.default;
         this.scoreLabel.text = this.getScoreText();
     }
 
-    dying(player, bomb) {
+    playerHit = (player, bomb) => {
+        if (this.player.body.checkCollision.none)
+            return;
+
+        this.playerState.lives--;
+        this.livesLabel.text = `Lives ${this.playerState.lives}`;
+
+        if (this.playerState.lives <= 0 && !this.playerState.isDead)
+            this.dying(bomb);
+        else if (this.playerState.lives > 0) {
+            this.objectExplode(bomb);
+            this.player.body.checkCollision.none = true;
+
+            const tween = this.tweens.add({
+                targets: this.player,
+                alpha: { from: 0.3, to: .9 },
+                ease: 'Linear',
+                duration: 1500,
+                yoyo: true,
+                repeat: 0,
+                onComplete: () => {
+                    this.player.alpha = 1;
+                    this.player.body.checkCollision.none = false;
+                },
+                callbackScope: this,
+            });
+        }
+    }
+
+    dying(bomb) {
         if (this.playerState.isDead) return;
 
         this.playerState.isDead = true;
-        // console.log('bomb', bomb);
-        // bomb?.setTexture('explode');
-        // bomb?.play('explodeAnim');
-
-        this.bombExplode(bomb, 4);
+        this.objectExplode(bomb, 4);
 
         this.player.setVelocity(0, 0);
+
         this.player?.play('player_die', true)?.on('animationcomplete',
             () => {
-
-                this.player?.setTexture('explode');
-                this.player?.play('explodeAnim', true)?.on('animationcomplete',
-                    () => {
-                        this.player?.destroy();
-                        this.scene.start("gameOver");
-                    }, this);
+                this.objectExplode(this.player, 5);
+                setTimeout(() => this.scene.start("gameOver"), 2000);
             }, this);
     }
 
@@ -177,7 +197,7 @@ export default class Scene extends ScenePhaser {
 
     }
 
-    createScore = () => {
+    createScoreBoard = () => {
         const graphics = this.add.graphics();
 
         graphics.fillStyle(gameSettings.score.board.color, .9);
@@ -185,6 +205,8 @@ export default class Scene extends ScenePhaser {
 
         this.scoreLabel = this.add.bitmapText(gameSettings.score.text.x, gameSettings.score.text.y, 'pixelFont', this.getScoreText(), gameSettings.score.text.fontSize);
 
+        this.livesLabel = this.add.bitmapText(getSizes().width - 120,
+            gameSettings.score.text.y, 'pixelFont', `Lives ${this.playerState.lives}`, gameSettings.score.text.fontSize);
     }
 
 }
